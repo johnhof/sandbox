@@ -1,0 +1,15 @@
+
+logs
+*.log
+pids
+*.pid
+*.seed
+JSCover
+lib-cov
+coverage
+.grunt
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
