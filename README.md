@@ -2,9 +2,9 @@ Sandbox
 =======
 
 to run:
-- install Node, and MongoDB
+- install [Node](http://nodejs.org/download/), and [MongoDB](http://docs.mongodb.org/manual/installation/)
 - run `$ npm install`
-- run `$ sandbox [target]`
+- run `$ node sandbox [target]`
 
 ## The following targets are currently supported
 

@@ -1,6 +1,6 @@
 var mongoose  = require('mongoose');
 
-module.exports =  function  (done) {
+module.exports = function (done) {
   mongoose.connect('mongodb://localhost/database')
 
   var fooSchema = new mongoose.Schema({ caps : String })
