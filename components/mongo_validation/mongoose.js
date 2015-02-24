@@ -1,16 +1,35 @@
 var mongoose  = require('mongoose');
 
 module.exports = function (done) {
-  mongoose.connect('mongodb://localhost/database')
+  mongoose.connect('mongodb://localhost/database');
 
-  var fooSchema = new mongoose.Schema({ caps : String })
-  var FooModel  = mongoose.model('Foo', fooSchema);
+  //
+  // schema declaration
+  //
+  var fooSchema = new mongoose.Schema({
+    caps : {
+      type : String,
+      validate : [{
+        msg       : 'caps must be uppercase',
+        validator : function (value) {
+          return value === value.toUpperCase();
+        }
+      }]
+    }
+  });
 
-  FooModel.schema.path('caps').validate(function isUppercase(value) {
-    return value === value.toUpperCase();
-  }, 'Invalid caps');
+  var FooModel = mongoose.model('Foo', fooSchema);
 
-  var foo = new FooModel({ caps: 'bar' });
+  //
+  // SchemaType method
+  //
+  FooModel.schema.path('caps').validate(function alphanum (value) {
+    return /^[a-z0-9]+$/i.test(value);
+  }, 'caps must be numbers and letters only');
+
+  var foo = new FooModel({
+    caps : 'bar!'
+  });
 
   foo.save(function (error) {
 
@@ -20,12 +39,11 @@ module.exports = function (done) {
     //   name    : 'ValidationError',
     //   errors  : {
     //     caps : {
-    //         name    : 'ValidatorError',
-    //         path    : 'caps',
-    //         type    : 'user defined',
-    //         value   : 'bar'
-    //         message : 'Invalid caps',
-    //       }
+    //       message : 'caps must be uppercase',
+    //       name    : 'ValidatorError',
+    //       path    : 'caps',
+    //       type    : 'user defined',
+    //       value   : 'bar!'
     //     }
     //   }
     // }
@@ -33,11 +51,11 @@ module.exports = function (done) {
     console.log(foo.errors);
     // {
     //   caps : {
-    //     message : 'Invalid caps',
+    //     message : 'caps must be uppercase',
     //     name    : 'ValidatorError',
     //     path    : 'caps',
     //     type    : 'user defined',
-    //     value   : 'bar'
+    //     value   : 'bar!'
     //   }
     // }
 

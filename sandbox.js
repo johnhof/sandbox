@@ -12,7 +12,7 @@ var component = helpers.findValue(components, target);
 if (process.argv.length < 3) {
   console.log('\nTarget not specified.'.yellow);
   printcomponents()
-} else if (!component) {
+} else if (typeof component !== 'function') {
   console.log('\nTarget '.yellow + target + ' not supported.'.yellow);
   printcomponents();
 } else {
