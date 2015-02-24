@@ -8,3 +8,6 @@ to run:
 
 ## The following targets are currently supported
 
+  - mongo_validation.mongoman
+  - mongo_validation.mongoose
+  - mongo_validation.mongoose_validator
