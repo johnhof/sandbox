@@ -8,7 +8,9 @@ to run:
 
 ## The following targets are currently supported
 
+  - data_structures.binary_search_tree
   - mongo.validation.mongoman
   - mongo.validation.mongoose
   - mongo.validation.mongoose_validator
+
 
