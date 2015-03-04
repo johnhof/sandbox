@@ -14,7 +14,7 @@ module.exports = function (done) {
   }
 
   BinaryTree.prototype.add = function (newValue) {
-    // add as the root note if nonde exists
+    // add as the root note if none exists
     if (!this.root) {
       this.root = new Node(newValue);
 
