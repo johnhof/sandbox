@@ -20,9 +20,8 @@ module.exports = function (done) {
 
     } else {
       var current = this.root;
-      var bound   = 100;
 
-      for (var depth = 0; depth < bound && current; depth++) {
+      while (current) {
         // determine if this value is right or left
         var placement = current.place(newValue);
 
@@ -33,7 +32,7 @@ module.exports = function (done) {
         // if there's no child there, add this as the child
         } else {
           current[placement] = new Node(newValue, current);
-          return depth;
+          return;
         }
       }
     }
