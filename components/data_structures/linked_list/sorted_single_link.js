@@ -25,10 +25,8 @@ module.exports = function (done) {
 
 
     while (currentNode) {
-      if (!currentNode.next) {
-        currentNode.next = new Node(val);
+      if (currentNode.val === val) {
         return;
-
       } else if (currentNode.val > val) {
         // insert at head
         if (!previousNode) {
@@ -40,6 +38,10 @@ module.exports = function (done) {
           previousNode.next = new Node(val, currentNode);
           return;
         }
+
+      } else if (!currentNode.next) {
+        currentNode.next = new Node(val);
+        return;
       }
 
       previousNode = currentNode;
@@ -56,11 +58,16 @@ module.exports = function (done) {
     while (currentNode) {
       // foud value
       if (currentNode.val === val) {
-        previousNode.next = currentNode.next;
 
-        if (this.tail.val === currentNode.val) {
-          this.tail = previousNode;
+        // edge case, first node
+        if (!previousNode) {
+          this.head = currentNode.next;
+        } else {
+          previousNode.next = currentNode.next;
         }
+
+        return;
+
 
       // iterate
       } else {
@@ -112,25 +119,22 @@ module.exports = function (done) {
 
   var fooList = new LinkedListAscending();
 
+  console.log('\n  Insert:'.cyan);
+  test('insert', 5);
+  test('insert', 4);
+  test('insert', 6);
+  test('insert', 3);
+  test('insert', 1);
 
-  // insert two at end
-  fooList.insert(5);
-  console.log('  ' + fooList.toString());
+  console.log('\n  Delete:'.cyan);
+  test('delete', 1);
+  test('delete', 4);
+  test('delete', 6);
 
-  fooList.insert(4);
-  console.log('  ' + fooList.toString());
-
-  // insert at beginning
-  fooList.insert(6);
-  console.log('  ' + fooList.toString());
-
-  // insert at middle
-  fooList.insert(3);
-  console.log('  ' + fooList.toString());
-
-  // insert out of bounds
-  fooList.insert(1);
-  console.log('  ' + fooList.toString());
+  function test (action, target) {
+    fooList[action](target);
+    console.log('    (' + (target + '').yellow + ') = ' + fooList.toString());
+  }
 
   done();
 }

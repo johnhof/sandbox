@@ -71,11 +71,13 @@ module.exports = function (done) {
           this.tail = previousNode;
         }
 
+        return;
+
       // iterate
-      } else {
-        previousNode = currentNode;
-        currentNode = currentNode.next;
       }
+
+      previousNode = currentNode;
+      currentNode = currentNode.next;
     }
 
     return false;
@@ -90,7 +92,7 @@ module.exports = function (done) {
       currentNode = currentNode.next;
 
       if (currentNode) {
-       result += ' -> '.cyan;
+       result += ' -> '.green;
       }
     }
 
@@ -121,23 +123,21 @@ module.exports = function (done) {
 
   var fooList = new LinkedList();
 
+  console.log('\n  Insert: \n'.cyan);
+  test('insert', 'foo');
+  test('insert', 'bar');
+  test('insert', 'biz', 0);
+  test('insert', 'baz', 1);
+  test('insert', 'buz', 10);
 
-  // insert two at end
-  fooList.insert('foo');
-  fooList.insert('bar');
-  console.log('  ' + fooList.toString());
+  console.log('\n  Delete: \n'.cyan);
+  test('insert', 'baz');
 
-  // insert at beginning
-  fooList.insert('biz', 0);
-  console.log('  ' + fooList.toString());
+  function test (action, target, index) {
+    fooList[action](target, index);
+    console.log('    (' + (target + '').yellow + ') = ' + fooList.toString());
+  }
 
-  // insert at middle
-  fooList.insert('baz', 1);
-  console.log('  ' + fooList.toString());
-
-  // insert out of bounds
-  fooList.insert('buz', 10);
-  console.log('  ' + fooList.toString());
 
   done();
 }
