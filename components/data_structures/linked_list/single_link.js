@@ -131,11 +131,11 @@ module.exports = function (done) {
   test('insert', 'buz', 10);
 
   console.log('\n  Delete: \n'.cyan);
-  test('insert', 'baz');
+  test('delete', 'baz');
 
   function test (action, target, index) {
     fooList[action](target, index);
-    console.log('    (' + (target + '').yellow + ') = ' + fooList.toString());
+    console.log('    (' + (target + '').yellow + ') ' + '='.blue + ' ' + fooList.toString());
   }
 
 

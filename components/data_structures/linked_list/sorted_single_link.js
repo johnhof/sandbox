@@ -88,7 +88,7 @@ module.exports = function (done) {
       currentNode = currentNode.next;
 
       if (currentNode) {
-       result += ' -> '.cyan;
+       result += ' -> '.green;
       }
     }
 
@@ -133,7 +133,7 @@ module.exports = function (done) {
 
   function test (action, target) {
     fooList[action](target);
-    console.log('    (' + (target + '').yellow + ') = ' + fooList.toString());
+    console.log('    (' + (target + '').yellow + ') ' + '='.blue + ' ' + fooList.toString());
   }
 
   done();
